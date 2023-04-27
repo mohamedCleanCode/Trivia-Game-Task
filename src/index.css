@@ -28,17 +28,29 @@ body {
   justify-content: space-between;
   align-items: center;
 }
+@media (max-width: 767px) {
+  .container {
+    flex-direction: column;
+  }
+}
 .left {
   width: 50%;
-  height: 50%;
+  height: 70%;
+}
+@media (max-width: 767px) {
+  .left {
+    width: 100%;
+    height: 35%;
+  }
 }
 .left img {
   width: 100%;
   height: 100%;
+  object-fit: contain;
 }
 .right {
   width: 50%;
-  height: 50%;
+  min-height: 60%;
   background-color: var(--primary);
   border: 5px solid var(--third);
   border-radius: 12px;
@@ -48,6 +60,12 @@ body {
   justify-content: space-between;
   text-align: center;
 }
+@media (max-width: 767px) {
+  .right {
+    width: 100%;
+    height: 65%;
+  }
+}
 .right input {
   width: 100%;
   border-radius: 8px;
@@ -56,6 +74,7 @@ body {
 .right input:focus {
   outline: none;
 }
+.right div:nth-child(2),
 .right div:first-child {
   background-color: var(--third);
   padding: 10px;
@@ -63,7 +82,11 @@ body {
   line-height: 1.5;
   font-size: 18px;
 }
-.right div:nth-child(2) input {
+.points {
+  color: red;
+  font-weight: bold;
+}
+.right div:nth-child(3) input {
   height: 40px;
   padding: 10px;
   text-align: center;

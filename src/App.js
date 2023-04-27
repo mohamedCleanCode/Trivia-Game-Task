@@ -1,38 +1,10 @@
-import { useEffect, useState } from "react";
+import { ToastContainer } from "react-toastify";
 import imageOne from "./assets/image.png";
+import useApp from "./hook/useApp";
 
 function App() {
-  const URL = "https://opentdb.com/api.php?amount=1";
-  const [data, setData] = useState();
-  const [question, setQuestion] = useState();
-  const [answer, setAnswer] = useState();
+  const [handleSubmit, points, question, onChangeAnswer, answer] = useApp();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  }
-
-  const onChangeAnswer = (e) => {
-    let value = e.target.value.trim();
-    setAnswer(value);
-  }
-
-  const fetchData = async () => {
-    const res = await fetch(URL).then((result) => result.json()).catch((err) => err.response);
-    setData(res.results);
-    return;
-  }
-
-  useEffect(() => {
-    if(data) {
-      localStorage.setItem("answer", data[0]?.correct_answer);
-        setQuestion(data[0]?.question);
-    }
-  }, [data]);
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-  
   return (
     <div className="App">
       <div className="container">
@@ -40,6 +12,9 @@ function App() {
           <img src={imageOne} alt="logo" />
         </div>
         <form className="right" onSubmit={handleSubmit}>
+          <div>
+            Your Points : <span className="points">{points}</span>
+          </div>
           <div className="question">{question}</div>
           <div className="answer">
             <input
@@ -53,6 +28,7 @@ function App() {
           <input className="btn" type="submit" value="Submit" />
         </form>
       </div>
+      <ToastContainer autoClose={2000} />
     </div>
   );
 }
